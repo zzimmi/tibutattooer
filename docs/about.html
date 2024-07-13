@@ -63,6 +63,27 @@
         .nav a:hover {
             text-decoration: underline;
         }
+
+        /* Media Query per dispositivi mobili */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                padding: 20px;
+            }
+            .photo {
+                margin: 0 0 20px 0;
+            }
+            .bio {
+                font-size: 1em; /* Riduci la dimensione del font per i dispositivi mobili */
+            }
+            .title {
+                font-size: 2em; /* Riduci la dimensione del titolo per i dispositivi mobili */
+                margin-top: 10px;
+            }
+            .nav {
+                display: none; /* Nascondi navigazione su dispositivi mobili */
+            }
+        }
     </style>
 </head>
 <body>
