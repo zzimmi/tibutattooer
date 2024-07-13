@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Works - Tibutattooer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Gloock&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Arial', sans-serif;
+            background-color: white;
+            color: black;
+            text-align: center;
+        }
+        .title {
+            margin-top: 20px;
+            font-size: 3em;
+            font-family: 'Gloock', serif;
+        }
+        .gallery {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 50px;
+        }
+        .gallery div {
+            margin: 15px;
+        }
+        .gallery img {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+        .gallery img:hover {
+            transform: scale(1.1);
+        }
+        .caption {
+            margin-top: 10px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="title">Choose Your Style</div>
+    <div class="gallery">
+        <div>
+            <a href="japanese.html"><img src="https://github.com/zzimmi/tibutattooer/blob/main/WhatsApp%20Image%202024-07-13%20at%2016.22.36.jpeg?raw=true" alt="Japanese Style"></a>
+            <div class="caption">Japanese</div>
+        </div>
+        <div>
+            <a href="lettering.html"><img src="https://github.com/zzimmi/tibutattooer/blob/main/WhatsApp%20Image%202024-07-13%20at%2016.22.36%20(1).jpeg?raw=true" alt="Lettering Style"></a>
+            <div class="caption">Lettering</div>
+        </div>
+        <div>
+            <a href="oldschool.html"><img src="https://github.com/zzimmi/tibutattooer/blob/main/WhatsApp%20Image%202024-07-13%20at%2016.22.35.jpeg?raw=true" alt="Old School Style"></a>
+            <div class="caption">Old School</div>
+        </div>
+    </div>
+</body>
+</html>
