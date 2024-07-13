@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About - Tibutattooer</title>
+    <!-- Link al font per il titolo -->
     <link href="https://fonts.googleapis.com/css2?family=Gloock&display=swap" rel="stylesheet">
+    <!-- Link al font per la biografia -->
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <style>
         body, html {
             margin: 0;
@@ -12,7 +15,7 @@
             width: 100%;
             height: 100%;
             font-family: 'Arial', sans-serif;
-            background-color: white;
+            background-color: white; /* Colore di sfondo */
             color: black;
         }
         .container {
@@ -23,25 +26,33 @@
             max-width: 1200px;
             margin: auto;
         }
-        .bio {
-            flex: 1;
-            margin-right: 20px;
-            font-size: 1.2em;
-            line-height: 1.6;
-        }
         .photo {
             flex: 1;
+            margin-right: 20px;
         }
         .photo img {
-            max-width: 100%;
+            max-width: 100%; /* Dimensioni immagine */
             height: auto;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0,0,0,0.2);
         }
+        .bio {
+            flex: 1;
+            font-size: 1.2em; /* Grandezza del carattere */
+            font-family: 'Pacifico', cursive; /* Font corsivo per la biografia */
+            font-weight: bold; /* Grassetto per la biografia */
+            line-height: 1.6;
+        }
+        .title {
+            text-align: center;
+            font-size: 3em; /* Grandezza del carattere del titolo */
+            font-family: 'Gloock', serif; /* Font per il titolo */
+            margin-top: 20px;
+        }
         .nav {
             position: absolute;
-            top: 10%;
-            right: 5%;
+            top: 10px;
+            right: 10px;
         }
         .nav a {
             color: black;
@@ -60,14 +71,15 @@
         <a href="works.html">Works</a>
         <a href="contacts.html">Contacts</a>
     </div>
+    <div class="title">About Me</div>
     <div class="container">
+        <div class="photo">
+            <img src="https://github.com/zzimmi/tibutattooer/blob/main/tibu.jpg?raw=true" alt="Tibutattooer">
+        </div>
         <div class="bio">
             <h2>Biografia</h2>
             <p>Benvenuti nel sito ufficiale di Tibutattooer. Con anni di esperienza e una passione per l'arte del tatuaggio, Tibutattooer offre disegni unici e personalizzati per ogni cliente. Ogni tatuaggio è realizzato con precisione e cura, utilizzando solo i migliori materiali e tecniche all'avanguardia.</p>
             <p>Puoi modificare questa biografia per aggiungere più informazioni sulla tua esperienza, lo stile di tatuaggio che preferisci, e qualsiasi altra cosa desideri condividere con i tuoi visitatori.</p>
-        </div>
-        <div class="photo">
-            <img src="https://github.com/zzimmi/tibutattooer/blob/main/tibu.jpg?raw=true" alt="Tibutattooer">
         </div>
     </div>
 </body>
