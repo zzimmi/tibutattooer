@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Tibutattooer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Gloock&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Arial', sans-serif;
+            background-color: white;
+            color: black;
+        }
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 50px;
+            max-width: 1200px;
+            margin: auto;
+        }
+        .bio {
+            flex: 1;
+            margin-right: 20px;
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+        .photo {
+            flex: 1;
+        }
+        .photo img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+        .nav {
+            position: absolute;
+            top: 10%;
+            right: 5%;
+        }
+        .nav a {
+            color: black;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.2em;
+        }
+        .nav a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href="index.html">Home</a>
+        <a href="works.html">Works</a>
+        <a href="contacts.html">Contacts</a>
+    </div>
+    <div class="container">
+        <div class="bio">
+            <h2>Biografia</h2>
+            <p>Benvenuti nel sito ufficiale di Tibutattooer. Con anni di esperienza e una passione per l'arte del tatuaggio, Tibutattooer offre disegni unici e personalizzati per ogni cliente. Ogni tatuaggio è realizzato con precisione e cura, utilizzando solo i migliori materiali e tecniche all'avanguardia.</p>
+            <p>Puoi modificare questa biografia per aggiungere più informazioni sulla tua esperienza, lo stile di tatuaggio che preferisci, e qualsiasi altra cosa desideri condividere con i tuoi visitatori.</p>
+        </div>
+        <div class="photo">
+            <img src="https://github.com/zzimmi/tibutattooer/blob/main/tibu.jpg?raw=true" alt="Tibutattooer">
+        </div>
+    </div>
+</body>
+</html>
