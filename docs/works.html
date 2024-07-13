@@ -67,12 +67,17 @@
                 margin-top: 10px;
             }
             .nav {
+                display: none; /* Nascondi navigazione su dispositivi mobili */
+            }
+            .nav-mobile {
+                display: block; /* Mostra navigazione su dispositivi mobili */
+                position: absolute;
                 top: 5%;
                 right: 0;
                 width: 100%;
                 text-align: center;
             }
-            .nav a {
+            .nav-mobile a {
                 display: block;
                 margin: 10px 0;
                 font-size: 1em;
@@ -94,6 +99,11 @@
 <body>
     <div class="title">Choose Your Style</div>
     <div class="nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contacts.html">Contacts</a>
+    </div>
+    <div class="nav-mobile" style="display: none;">
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
         <a href="contacts.html">Contacts</a>
