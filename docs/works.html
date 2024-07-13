@@ -59,6 +59,36 @@
         .nav a:hover {
             text-decoration: underline;
         }
+
+        /* Media Query per dispositivi mobili */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2em;
+                margin-top: 10px;
+            }
+            .nav {
+                top: 5%;
+                right: 0;
+                width: 100%;
+                text-align: center;
+            }
+            .nav a {
+                display: block;
+                margin: 10px 0;
+                font-size: 1em;
+            }
+            .gallery {
+                flex-direction: column;
+                margin-top: 20px;
+            }
+            .gallery div {
+                margin: 10px 0;
+            }
+            .gallery img {
+                width: 80%;
+                height: auto;
+            }
+        }
     </style>
 </head>
 <body>
