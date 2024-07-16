@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tibutattooer</title>
-    <link href="https://fonts.googleapis.com/css2?family=Gloock&family=Great+Vibes&family=Permanent+Marker&family=Roboto&family=Open+Sans&family=Lobster&family=Pacifico&family=Montserrat&family=Playfair+Display&family=Raleway&family=Nunito&family=Poppins&family=Merriweather&family=Oswald&family=Lato&family=Quicksand&family=Ubuntu&family=Baloo+2&family=Rubik&family=Amatic+SC&family=Bebas+Neue&family=Cabin&family=Comfortaa&family=Dancing+Script&family=Fjalla+One&family=Inconsolata&family=Josefin+Sans&family=Kalam&family=Lora&family=Merriweather+Sans&family=Neucha&family=Nunito+Sans&family=Overpass&family=PT+Sans&family=PT+Serif&family=Play&family=Righteous&family=Roboto+Condensed&family=Roboto+Mono&family=Sacramento&family=Source+Sans+Pro&family=Teko&family=Ubuntu+Mono&family=Work+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gloock&family=Great+Vibes&family=Permanent+Marker&family=Roboto&family=Open+Sans&display=swap" rel="stylesheet">
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <style>
         body, html {
             margin: 0;
@@ -12,8 +13,8 @@
             width: 100%;
             height: 100%;
             font-family: 'Arial', sans-serif;
-            overflow: hidden;
             background: black;
+            color: white;
         }
         .background-image {
             position: fixed;
@@ -36,33 +37,24 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.4);
         }
-        .draggable {
-            position: absolute;
-            cursor: move;
-        }
-        .title {
-            top: 15%;
+        .toolbar {
+            background: #333;
+            padding: 10px;
+            position: fixed;
+            top: 0;
             width: 100%;
-            text-align: center;
-            color: white;
-            font-size: 5em;
-            font-family: 'Permanent Marker', cursive;
-            text-shadow: 2px 2px 4px #000;
+            z-index: 1000;
         }
-        .nav {
-            top: 10%;
-            right: 5%;
+        .toolbar button, .toolbar select, .toolbar input {
+            margin: 5px;
+            padding: 5px;
         }
-        .nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 1.8em;
-            text-shadow: 2px 2px 4px #000;
-            font-family: 'Great Vibes', cursive;
-        }
-        .nav a:hover {
-            text-decoration: underline;
+        #editor {
+            margin-top: 60px;
+            padding: 20px;
+            background: #fff;
+            color: #000;
+            min-height: 400px;
         }
         .footer {
             bottom: 0;
@@ -103,62 +95,22 @@
             vertical-align: middle;
             margin: 0 5px;
         }
-        .toolbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-            z-index: 1000;
-        }
-        .toolbar select, .toolbar input, .toolbar button {
-            padding: 5px;
-            margin: 5px;
-            font-size: 1em;
-        }
-        .toolbar button {
-            cursor: pointer;
-        }
-        @media (max-width: 768px) {
-            .title {
-                font-size: 3em;
-                top: 10%;
-            }
-            .nav {
-                top: 20%;
-                right: 0;
-                width: 100%;
-                text-align: center;
-            }
-            .nav a {
-                display: block;
-                margin: 10px 0;
-                font-size: 1.5em;
-            }
-            .footer {
-                flex-direction: column;
-                font-size: 0.8em;
-                padding: 5px 0;
-            }
-            .footer .social img, .footer .whatsapp img, .footer .contact img {
-                width: 30px;
-                height: 30px;
-                margin: 5px;
-            }
-            .toolbar {
-                font-size: 0.8em;
-            }
-        }
     </style>
 </head>
 <body>
-    <div class="background-image" id="background-image"></div>
-    <div class="overlay"></div>
-    <div class="title draggable" contenteditable="true">Tibutattooer</div>
-    <div class="nav draggable" contenteditable="true">
+
+<div class="background-image" id="background-image"></div>
+<div class="overlay"></div>
+
+<div class="toolbar">
+    <button onclick="execCmd('undo')">Undo</button>
+    <button onclick="execCmd('redo')">Redo</button>
+    <button onclick="logout()">Logout</button>
+</div>
+
+<div id="editor">
+    <h1 class="title">Tibutattooer</h1>
+    <div class="nav">
         <a href="works.html">Works</a>
         <a href="healing.html">Healing</a>
         <a href="about.html">About</a>
@@ -166,7 +118,7 @@
         <a href="contacts.html">Contact</a>
         <a href="login.html" class="login">Login</a>
     </div>
-    <div class="footer draggable" contenteditable="true">
+    <div class="footer">
         <div class="location">
             <h3>Location</h3>
             <a href="https://www.google.it/maps/place/Studio+negozio+Tatuaggi+Steel+Power+Tattoo/@45.5246253,9.5198435,17z/data=!3m1!4b1!4m6!3m5!1s0x47814a8cdf04eccd:0xe7bafbaaf4727410!8m2!3d45.5246216!4d9.5224184!16s%2Fg%2F11bz__q_ln?entry=ttu" target="_blank">Piazza G. Garibaldi, 68, 20062 Cassano d'Adda MI</a>
@@ -185,283 +137,35 @@
             <a href="contacts.html">yungtibu@gmail.com</a>
         </div>
     </div>
+</div>
 
-    <div class="toolbar">
-        <select id="fontSelect">
-            <option value="'Great Vibes', cursive">Great Vibes</option>
-            <option value="'Permanent Marker', cursive">Permanent Marker</option>
-            <option value="'Roboto', sans-serif">Roboto</option>
-            <option value="'Arial', sans-serif">Arial</option>
-            <option value="'Gloock', serif">Gloock</option>
-            <option value="'Open Sans', sans-serif">Open Sans</option>
-            <option value="'Lobster', cursive">Lobster</option>
-            <option value="'Pacifico', cursive">Pacifico</option>
-            <option value="'Montserrat', sans-serif">Montserrat</option>
-            <option value="'Playfair Display', serif">Playfair Display</option>
-            <option value="'Raleway', sans-serif">Raleway</option>
-            <option value="'Nunito', sans-serif">Nunito</option>
-            <option value="'Poppins', sans-serif">Poppins</option>
-            <option value="'Merriweather', serif">Merriweather</option>
-            <option value="'Oswald', sans-serif">Oswald</option>
-            <option value="'Lato', sans-serif">Lato</option>
-            <option value="'Quicksand', sans-serif">Quicksand</option>
-            <option value="'Ubuntu', sans-serif">Ubuntu</option>
-            <option value="'Baloo 2', cursive">Baloo 2</option>
-            <option value="'Rubik', sans-serif">Rubik</option>
-            <option value="'Amatic SC', cursive">Amatic SC</option>
-            <option value="'Bebas Neue', sans-serif">Bebas Neue</option>
-            <option value="'Cabin', sans-serif">Cabin</option>
-            <option value="'Comfortaa', cursive">Comfortaa</option>
-            <option value="'Dancing Script', cursive">Dancing Script</option>
-            <option value="'Fjalla One', sans-serif">Fjalla One</option>
-            <option value="'Inconsolata', monospace">Inconsolata</option>
-            <option value="'Josefin Sans', sans-serif">Josefin Sans</option>
-            <option value="'Kalam', cursive">Kalam</option>
-            <option value="'Lora', serif">Lora</option>
-            <option value="'Merriweather Sans', sans-serif">Merriweather Sans</option>
-            <option value="'Neucha', cursive">Neucha</option>
-            <option value="'Nunito Sans', sans-serif">Nunito Sans</option>
-            <option value="'Overpass', sans-serif">Overpass</option>
-            <option value="'PT Sans', sans-serif">PT Sans</option>
-            <option value="'PT Serif', serif">PT Serif</option>
-            <option value="'Play', sans-serif">Play</option>
-            <option value="'Righteous', cursive">Righteous</option>
-            <option value="'Roboto Condensed', sans-serif">Roboto Condensed</option>
-            <option value="'Roboto Mono', monospace">Roboto Mono</option>
-            <option value="'Sacramento', cursive">Sacramento</option>
-            <option value="'Source Sans Pro', sans-serif">Source Sans Pro</option>
-            <option value="'Teko', sans-serif">Teko</option>
-            <option value="'Ubuntu Mono', monospace">Ubuntu Mono</option>
-            <option value="'Work Sans', sans-serif">Work Sans</option>
-        </select>
-        <input type="number" id="fontSize" min="10" max="100" value="16">
-        <input type="color" id="fontColor" value="#ffffff">
-        <label for="fontWeight">B</label>
-        <input type="checkbox" id="fontWeight">
-        <label for="fontStyle">I</label>
-        <input type="checkbox" id="fontStyle">
-        <button onclick="applyStyles()">Applica Stili</button>
-        <label for="backgroundImage">Sfondo:</label>
-        <input type="file" id="backgroundImage" accept="image/*" onchange="changeBackgroundImage(event)">
-        <button onclick="removeBackgroundImage()">Rimuovi Sfondo</button>
-        <input type="color" id="backgroundColor" value="#000000" onchange="changeBackgroundColor()">
-        <select id="backgroundEffects" onchange="applyBackgroundEffects()">
-            <option value="none">Nessuno</option>
-            <option value="blur">Sfocatura</option>
-            <option value="grayscale">Scala di grigi</option>
-            <option value="sepia">Seppia</option>
-            <option value="invert">Inverti colori</option>
-            <option value="brightness">Luminosità</option>
-            <option value="contrast">Contrasto</option>
-            <option value="saturate">Saturazione</option>
-            <option value="hue-rotate">Rotazione tinta</option>
-            <option value="opacity">Opacità</option>
-            <option value="dissolve">Dissolvenza</option>
-        </select>
-        <button onclick="saveChanges()">Salva</button>
-        <button onclick="undoChanges()">Indietro</button>
-        <button onclick="logout()">Logout</button>
-        <button onclick="toggleEditMode()">Modifica/Trascina</button>
-    </div>
-
-    <script>
-        let savedState = {};
-        let history = [];
-        let currentStateIndex = -1;
-        let isEditMode = true;
-
-        function applyStyles() {
-            const selectedFont = document.getElementById('fontSelect').value;
-            const fontSize = document.getElementById('fontSize').value + 'px';
-            const fontColor = document.getElementById('fontColor').value;
-            const isBold = document.getElementById('fontWeight').checked ? 'bold' : 'normal';
-            const isItalic = document.getElementById('fontStyle').checked ? 'italic' : 'normal';
-            
-            document.execCommand('fontName', false, selectedFont);
-            document.execCommand('fontSize', false, 7); // This is a trick to set the size via inline style
-            document.execCommand('foreColor', false, fontColor);
-            document.execCommand('bold', false, isBold === 'bold');
-            document.execCommand('italic', false, isItalic === 'italic');
-            
-            document.querySelectorAll('font[size="7"]').forEach(element => {
-                element.removeAttribute('size');
-                element.style.fontSize = fontSize;
-                element.style.fontWeight = isBold;
-                element.style.fontStyle = isItalic;
-            });
-
-            saveState();
-        }
-
-        function changeBackgroundImage(event) {
-            const file = event.target.files[0];
-            const reader = new FileReader();
-            
-            reader.onload = function(e) {
-                document.getElementById('background-image').style.backgroundImage = `url(${e.target.result})`;
-            };
-            
-            reader.readAsDataURL(file);
-
-            saveState();
-        }
-
-        function removeBackgroundImage() {
-            document.getElementById('background-image').style.backgroundImage = 'none';
-            saveState();
-        }
-
-        function changeBackgroundColor() {
-            const backgroundColor = document.getElementById('backgroundColor').value;
-            document.body.style.backgroundColor = backgroundColor;
-            saveState();
-        }
-
-        function applyBackgroundEffects() {
-            const effect = document.getElementById('backgroundEffects').value;
-            const backgroundImage = document.getElementById('background-image');
-            
-            switch (effect) {
-                case 'blur':
-                    backgroundImage.style.filter = 'blur(5px)';
-                    break;
-                case 'grayscale':
-                    backgroundImage.style.filter = 'grayscale(100%)';
-                    break;
-                case 'sepia':
-                    backgroundImage.style.filter = 'sepia(100%)';
-                    break;
-                case 'invert':
-                    backgroundImage.style.filter = 'invert(100%)';
-                    break;
-                case 'brightness':
-                    backgroundImage.style.filter = 'brightness(150%)';
-                    break;
-                case 'contrast':
-                    backgroundImage.style.filter = 'contrast(200%)';
-                    break;
-                case 'saturate':
-                    backgroundImage.style.filter = 'saturate(200%)';
-                    break;
-                case 'hue-rotate':
-                    backgroundImage.style.filter = 'hue-rotate(90deg)';
-                    break;
-                case 'opacity':
-                    backgroundImage.style.filter = 'opacity(50%)';
-                    break;
-                case 'dissolve':
-                    backgroundImage.style.transition = 'opacity 1s ease-in-out';
-                    backgroundImage.style.opacity = '0.5';
-                    break;
-                default:
-                    backgroundImage.style.filter = 'none';
-                    backgroundImage.style.transition = 'none';
-                    backgroundImage.style.opacity = '1';
-            }
-
-            saveState();
-        }
-
-        function saveState() {
-            const state = {
-                html: document.body.innerHTML,
-                backgroundColor: document.body.style.backgroundColor,
-                backgroundImage: document.getElementById('background-image').style.backgroundImage,
-                backgroundFilter: document.getElementById('background-image').style.filter,
-                backgroundOpacity: document.getElementById('background-image').style.opacity
-            };
-            if (currentStateIndex < history.length - 1) {
-                history = history.slice(0, currentStateIndex + 1);
-            }
-            history.push(state);
-            currentStateIndex++;
-        }
-
-        function saveChanges() {
-            savedState = {
-                html: document.body.innerHTML,
-                backgroundColor: document.body.style.backgroundColor,
-                backgroundImage: document.getElementById('background-image').style.backgroundImage,
-                backgroundFilter: document.getElementById('background-image').style.filter,
-                backgroundOpacity: document.getElementById('background-image').style.opacity
-            };
-            alert('Modifiche salvate!');
-        }
-
-        function undoChanges() {
-            if (currentStateIndex > 0) {
-                currentStateIndex--;
-                const state = history[currentStateIndex];
-                document.body.innerHTML = state.html;
-                document.body.style.backgroundColor = state.backgroundColor;
-                const backgroundImage = document.getElementById('background-image');
-                backgroundImage.style.backgroundImage = state.backgroundImage;
-                backgroundImage.style.filter = state.backgroundFilter;
-                backgroundImage.style.opacity = state.backgroundOpacity;
-                alert('Modifiche annullate!');
-            } else {
-                alert('Nessuna modifica precedente trovata.');
-            }
-        }
-
-        function logout() {
-            localStorage.setItem('loggedIn', 'false');
-            alert('Logout effettuato!');
-            // Aggiungi eventuale logica di reindirizzamento o pulizia dei dati utente
-        }
-
-        function toggleEditMode() {
-            isEditMode = !isEditMode;
-            document.querySelectorAll('.draggable').forEach(element => {
-                element.contentEditable = isEditMode;
-                element.style.cursor = isEditMode ? 'text' : 'move';
+<script>
+    tinymce.init({
+        selector: '#editor',
+        plugins: 'print preview importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
+        menubar: 'file edit view insert format tools table help',
+        toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
+        height: 500,
+        content_css: [
+            '//fonts.googleapis.com/css2?family=Gloock&family=Great+Vibes&family=Permanent+Marker&family=Roboto&family=Open+Sans&display=swap'
+        ],
+        setup: function (editor) {
+            editor.on('init', function (e) {
+                editor.setContent(document.getElementById('editor').innerHTML);
             });
         }
+    });
 
-        function makeDraggable(evt) {
-            if (isEditMode) return;
-            const element = evt.target;
-            let posX = 0, posY = 0, mouseX = 0, mouseY = 0;
+    function execCmd(command) {
+        tinymce.activeEditor.execCommand(command);
+    }
 
-            element.onmousedown = dragMouseDown;
+    function logout() {
+        localStorage.setItem('loggedIn', 'false');
+        alert('Logout effettuato!');
+        // Aggiungi eventuale logica di reindirizzamento o pulizia dei dati utente
+    }
+</script>
 
-            function dragMouseDown(e) {
-                e = e || window.event;
-                e.preventDefault();
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-                document.onmouseup = closeDragElement;
-                document.onmousemove = elementDrag;
-            }
-
-            function elementDrag(e) {
-                e = e || window.event;
-                e.preventDefault();
-                posX = mouseX - e.clientX;
-                posY = mouseY - e.clientY;
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-                element.style.top = (element.offsetTop - posY) + "px";
-                element.style.left = (element.offsetLeft - posX) + "px";
-            }
-
-            function closeDragElement() {
-                document.onmouseup = null;
-                document.onmousemove = null;
-                saveState();
-            }
-        }
-
-        document.querySelectorAll('.draggable').forEach(element => {
-            element.addEventListener('mousedown', makeDraggable);
-        });
-
-        window.onload = function() {
-            if (localStorage.getItem('loggedIn') === 'true') {
-                document.querySelector('.toolbar').style.display = 'block';
-                saveState(); // Salva lo stato iniziale
-            }
-        }
-    </script>
 </body>
 </html>
