@@ -62,6 +62,9 @@
         .nav a:hover {
             text-decoration: underline;
         }
+        .nav a#login {
+            display: none; /* Initially hidden on mobile */
+        }
         .footer {
             position: absolute;
             bottom: 0;
@@ -118,6 +121,9 @@
                 margin: 10px 0;
                 font-size: 1.5em;
             }
+            .nav a#login {
+                display: none;
+            }
             .footer {
                 flex-direction: column;
                 font-size: 0.8em;
@@ -141,7 +147,8 @@
         <a href="about.html">About</a>
         <a href="events.html">Upcoming Events</a>
         <a href="contacts.html">Contact</a>
-        <a href="#" onclick="openLoginPage()">Login</a>
+        <a href="#" id="login" onclick="toggleLogin()">Login</a>
+        <a href="#" id="logout" onclick="toggleLogout()" style="display: none;">Logout</a>
     </div>
     <div class="footer">
         <div class="location">
@@ -164,9 +171,40 @@
     </div>
 
     <script>
-        function openLoginPage() {
-            window.location.href = "login.html";
+        const username = 'yourUsername';  // Set your username here
+        const password = 'yourPassword';  // Set your password here
+
+        function toggleLogin() {
+            const enteredUsername = prompt("Enter username:");
+            const enteredPassword = prompt("Enter password:");
+            if (enteredUsername === username && enteredPassword === password) {
+                localStorage.setItem('loggedIn', 'true');
+                document.getElementById('login').style.display = 'none';
+                document.getElementById('logout').style.display = 'block';
+            } else {
+                alert("Incorrect username or password");
+            }
         }
+
+        function toggleLogout() {
+            localStorage.removeItem('loggedIn');
+            document.getElementById('login').style.display = 'block';
+            document.getElementById('logout').style.display = 'none';
+        }
+
+        window.onload = function() {
+            if (localStorage.getItem('loggedIn') === 'true') {
+                document.getElementById('login').style.display = 'none';
+                document.getElementById('logout').style.display = 'block';
+            } else {
+                document.getElementById('login').style.display = 'block';
+                document.getElementById('logout').style.display = 'none';
+            }
+
+            if (window.innerWidth > 768) {
+                document.getElementById('login').style.display = localStorage.getItem('loggedIn') === 'true' ? 'none' : 'block';
+            }
+        };
     </script>
 </body>
 </html>
