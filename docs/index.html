@@ -261,12 +261,14 @@
         <button onclick="saveChanges()">Salva</button>
         <button onclick="undoChanges()">Indietro</button>
         <button onclick="logout()">Logout</button>
+        <button onclick="toggleEditMode()">Modifica/Trascina</button>
     </div>
 
     <script>
         let savedState = {};
         let history = [];
         let currentStateIndex = -1;
+        let isEditMode = true;
 
         function applyStyles() {
             const selectedFont = document.getElementById('fontSelect').value;
@@ -408,7 +410,16 @@
             // Aggiungi eventuale logica di reindirizzamento o pulizia dei dati utente
         }
 
+        function toggleEditMode() {
+            isEditMode = !isEditMode;
+            document.querySelectorAll('.draggable').forEach(element => {
+                element.contentEditable = isEditMode;
+                element.style.cursor = isEditMode ? 'text' : 'move';
+            });
+        }
+
         function makeDraggable(evt) {
+            if (isEditMode) return;
             const element = evt.target;
             let posX = 0, posY = 0, mouseX = 0, mouseY = 0;
 
