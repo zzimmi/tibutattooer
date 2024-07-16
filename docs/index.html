@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tibutattooer</title>
-    <link href="https://fonts.googleapis.com/css2?family=Gloock&family=Great+Vibes&family=Permanent+Marker&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"> <!-- Font aggiuntivi -->
+    <link href="https://fonts.googleapis.com/css2?family=Gloock&family=Great+Vibes&family=Permanent+Marker&family=Roboto&family=Open+Sans&family=Lobster&family=Pacifico&family=Montserrat&family=Playfair+Display&family=Raleway&family=Nunito&family=Poppins&family=Merriweather&family=Oswald&family=Lato&family=Quicksand&family=Ubuntu&family=Baloo+2&family=Rubik&family=Amatic+SC&family=Bebas+Neue&family=Cabin&family=Comfortaa&family=Dancing+Script&family=Fjalla+One&family=Inconsolata&family=Josefin+Sans&family=Kalam&family=Lora&family=Merriweather+Sans&family=Neucha&family=Nunito+Sans&family=Overpass&family=PT+Sans&family=PT+Serif&family=Play&family=Righteous&family=Roboto+Condensed&family=Roboto+Mono&family=Sacramento&family=Source+Sans+Pro&family=Teko&family=Ubuntu+Mono&family=Work+Sans&display=swap" rel="stylesheet">
     <style>
         body, html {
             margin: 0;
@@ -14,7 +13,7 @@
             height: 100%;
             font-family: 'Arial', sans-serif;
             overflow: hidden;
-            background: black; /* Colore di sfondo di fallback */
+            background: black;
         }
         .background-image {
             position: fixed;
@@ -22,11 +21,12 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('https://github.com/zzimmi/tibutattooer/blob/main/collage_background.jpg?raw=true'); /* Assicurati che questo URL sia corretto */
+            background-image: url('https://github.com/zzimmi/tibutattooer/blob/main/collage_background.jpg?raw=true');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            opacity: 0.7; /* Leggera trasparenza per migliorare la visibilità del testo */
+            opacity: 0.7;
+            filter: none;
         }
         .overlay {
             position: fixed;
@@ -34,10 +34,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.4); /* Overlay semitrasparente per migliorare la leggibilità */
+            background: rgba(0, 0, 0, 0.4);
+        }
+        .draggable {
+            position: absolute;
+            cursor: move;
         }
         .title {
-            position: absolute;
             top: 15%;
             width: 100%;
             text-align: center;
@@ -47,7 +50,6 @@
             text-shadow: 2px 2px 4px #000;
         }
         .nav {
-            position: absolute;
             top: 10%;
             right: 5%;
         }
@@ -55,7 +57,7 @@
             color: white;
             text-decoration: none;
             margin: 0 15px;
-            font-size: 1.8em; /* Aumentata la dimensione del testo di navigazione */
+            font-size: 1.8em;
             text-shadow: 2px 2px 4px #000;
             font-family: 'Great Vibes', cursive;
         }
@@ -63,20 +65,19 @@
             text-decoration: underline;
         }
         .footer {
-            position: absolute;
             bottom: 0;
             width: 100%;
             background: rgba(0, 0, 0, 0.7);
             color: white;
             text-align: center;
-            padding: 10px 0; /* Ridotta l'altezza del footer */
-            font-size: 1em; /* Ridotta la dimensione del font */
+            padding: 10px 0;
+            font-size: 1em;
             display: flex;
             justify-content: space-around;
             box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
         }
         .footer div {
-            margin: 5px; /* Ridotta la marginatura per rendere il footer più compatto */
+            margin: 5px;
         }
         .footer h3 {
             font-family: 'Great Vibes', cursive;
@@ -91,10 +92,10 @@
             text-decoration: underline;
         }
         .footer .social img, .footer .whatsapp img {
-            width: 35px; /* Ridotta la dimensione dei loghi */
+            width: 35px;
             height: 35px;
             vertical-align: middle;
-            margin: 0 5px; /* Aumentata leggermente la distanza tra i loghi */
+            margin: 0 5px;
         }
         .footer .contact img {
             width: 35px;
@@ -103,7 +104,7 @@
             margin: 0 5px;
         }
         .font-selector {
-            display: none; /* Nasconde la sezione di selezione dei font */
+            display: none;
             position: absolute;
             top: 70%;
             left: 50%;
@@ -114,7 +115,7 @@
             color: white;
             text-align: center;
         }
-        .font-selector select {
+        .font-selector select, .font-selector input, .font-selector button {
             padding: 10px;
             margin: 10px;
             font-size: 1em;
@@ -133,29 +134,29 @@
             .nav a {
                 display: block;
                 margin: 10px 0;
-                font-size: 1.5em; /* Aumentata la dimensione del testo di navigazione su mobile */
+                font-size: 1.5em;
             }
             .footer {
                 flex-direction: column;
-                font-size: 0.8em; /* Ridotta ulteriormente la dimensione del font per mobile */
-                padding: 5px 0; /* Ridotta ulteriormente l'altezza del footer per mobile */
+                font-size: 0.8em;
+                padding: 5px 0;
             }
             .footer .social img, .footer .whatsapp img, .footer .contact img {
-                width: 30px; /* Ridotta la dimensione dei loghi per mobile */
+                width: 30px;
                 height: 30px;
                 margin: 5px;
             }
             .font-selector {
-                display: none; /* Nasconde la sezione di selezione dei font su mobile */
+                display: none;
             }
         }
     </style>
 </head>
 <body>
-    <div class="background-image"></div>
-    <div class="overlay"></div> <!-- Overlay semitrasparente -->
-    <div class="title">Tibutattooer</div>
-    <div class="nav">
+    <div class="background-image" id="background-image"></div>
+    <div class="overlay"></div>
+    <div class="title draggable" contenteditable="true">Tibutattooer</div>
+    <div class="nav draggable" contenteditable="true">
         <a href="works.html">Works</a>
         <a href="healing.html">Healing</a>
         <a href="about.html">About</a>
@@ -163,7 +164,7 @@
         <a href="contacts.html">Contact</a>
         <a href="login.html" class="login">Login</a>
     </div>
-    <div class="footer">
+    <div class="footer draggable" contenteditable="true">
         <div class="location">
             <h3>Location</h3>
             <a href="https://www.google.it/maps/place/Studio+negozio+Tatuaggi+Steel+Power+Tattoo/@45.5246253,9.5198435,17z/data=!3m1!4b1!4m6!3m5!1s0x47814a8cdf04eccd:0xe7bafbaaf4727410!8m2!3d45.5246216!4d9.5224184!16s%2Fg%2F11bz__q_ln?entry=ttu" target="_blank">Piazza G. Garibaldi, 68, 20062 Cassano d'Adda MI</a>
@@ -185,26 +186,238 @@
 
     <div class="font-selector">
         <label for="fontSelect">Seleziona Font:</label>
-        <select id="fontSelect" onchange="changeFont()">
+        <select id="fontSelect">
             <option value="'Great Vibes', cursive">Great Vibes</option>
             <option value="'Permanent Marker', cursive">Permanent Marker</option>
             <option value="'Roboto', sans-serif">Roboto</option>
             <option value="'Arial', sans-serif">Arial</option>
             <option value="'Gloock', serif">Gloock</option>
+            <option value="'Open Sans', sans-serif">Open Sans</option>
+            <option value="'Lobster', cursive">Lobster</option>
+            <option value="'Pacifico', cursive">Pacifico</option>
+            <option value="'Montserrat', sans-serif">Montserrat</option>
+            <option value="'Playfair Display', serif">Playfair Display</option>
+            <option value="'Raleway', sans-serif">Raleway</option>
+            <option value="'Nunito', sans-serif">Nunito</option>
+            <option value="'Poppins', sans-serif">Poppins</option>
+            <option value="'Merriweather', serif">Merriweather</option>
+            <option value="'Oswald', sans-serif">Oswald</option>
+            <option value="'Lato', sans-serif">Lato</option>
+            <option value="'Quicksand', sans-serif">Quicksand</option>
+            <option value="'Ubuntu', sans-serif">Ubuntu</option>
+            <option value="'Baloo 2', cursive">Baloo 2</option>
+            <option value="'Rubik', sans-serif">Rubik</option>
+            <option value="'Amatic SC', cursive">Amatic SC</option>
+            <option value="'Bebas Neue', sans-serif">Bebas Neue</option>
+            <option value="'Cabin', sans-serif">Cabin</option>
+            <option value="'Comfortaa', cursive">Comfortaa</option>
+            <option value="'Dancing Script', cursive">Dancing Script</option>
+            <option value="'Fjalla One', sans-serif">Fjalla One</option>
+            <option value="'Inconsolata', monospace">Inconsolata</option>
+            <option value="'Josefin Sans', sans-serif">Josefin Sans</option>
+            <option value="'Kalam', cursive">Kalam</option>
+            <option value="'Lora', serif">Lora</option>
+            <option value="'Merriweather Sans', sans-serif">Merriweather Sans</option>
+            <option value="'Neucha', cursive">Neucha</option>
+            <option value="'Nunito Sans', sans-serif">Nunito Sans</option>
+            <option value="'Overpass', sans-serif">Overpass</option>
+            <option value="'PT Sans', sans-serif">PT Sans</option>
+            <option value="'PT Serif', serif">PT Serif</option>
+            <option value="'Play', sans-serif">Play</option>
+            <option value="'Righteous', cursive">Righteous</option>
+            <option value="'Roboto Condensed', sans-serif">Roboto Condensed</option>
+            <option value="'Roboto Mono', monospace">Roboto Mono</option>
+            <option value="'Sacramento', cursive">Sacramento</option>
+            <option value="'Source Sans Pro', sans-serif">Source Sans Pro</option>
+            <option value="'Teko', sans-serif">Teko</option>
+            <option value="'Ubuntu Mono', monospace">Ubuntu Mono</option>
+            <option value="'Work Sans', sans-serif">Work Sans</option>
         </select>
+        <br>
+        <label for="fontSize">Dimensione Font:</label>
+        <input type="number" id="fontSize" min="10" max="100" value="16">
+        <br>
+        <label for="fontColor">Colore Font:</label>
+        <input type="color" id="fontColor" value="#ffffff">
+        <br>
+        <label for="fontWeight">Grassetto:</label>
+        <input type="checkbox" id="fontWeight">
+        <br>
+        <label for="fontStyle">Corsivo:</label>
+        <input type="checkbox" id="fontStyle">
+        <br>
+        <button onclick="applyStyles()">Applica Stili al Testo Selezionato</button>
+        <br>
+        <label for="backgroundImage">Carica Immagine di Sfondo:</label>
+        <input type="file" id="backgroundImage" accept="image/*" onchange="changeBackgroundImage(event)">
+        <br>
+        <button onclick="removeBackgroundImage()">Rimuovi Immagine di Sfondo</button>
+        <br>
+        <label for="backgroundColor">Colore di Sfondo:</label>
+        <input type="color" id="backgroundColor" value="#000000" onchange="changeBackgroundColor()">
+        <br>
+        <label for="backgroundEffects">Effetti di Sfondo:</label>
+        <select id="backgroundEffects" onchange="applyBackgroundEffects()">
+            <option value="none">Nessuno</option>
+            <option value="blur">Sfocatura</option>
+            <option value="grayscale">Scala di grigi</option>
+            <option value="sepia">Seppia</option>
+            <option value="invert">Inverti colori</option>
+            <option value="brightness">Luminosità</option>
+            <option value="contrast">Contrasto</option>
+            <option value="saturate">Saturazione</option>
+            <option value="hue-rotate">Rotazione tinta</option>
+            <option value="opacity">Opacità</option>
+            <option value="dissolve">Dissolvenza</option>
+        </select>
+        <br>
+        <button onclick="saveChanges()">Salva</button>
+        <button onclick="undoChanges()">Indietro</button>
     </div>
 
     <script>
-        function changeFont() {
+        let savedState = {};
+
+        function applyStyles() {
             const selectedFont = document.getElementById('fontSelect').value;
-            document.querySelector('.title').style.fontFamily = selectedFont;
-            document.querySelector('.nav').style.fontFamily = selectedFont;
-            document.querySelectorAll('.footer h3').forEach(element => {
-                element.style.fontFamily = selectedFont;
+            const fontSize = document.getElementById('fontSize').value + 'px';
+            const fontColor = document.getElementById('fontColor').value;
+            const isBold = document.getElementById('fontWeight').checked ? 'bold' : 'normal';
+            const isItalic = document.getElementById('fontStyle').checked ? 'italic' : 'normal';
+            
+            document.execCommand('fontName', false, selectedFont);
+            document.execCommand('fontSize', false, 7); // This is a trick to set the size via inline style
+            document.execCommand('foreColor', false, fontColor);
+            document.execCommand('bold', false, isBold === 'bold');
+            document.execCommand('italic', false, isItalic === 'italic');
+            
+            document.querySelectorAll('font[size="7"]').forEach(element => {
+                element.removeAttribute('size');
+                element.style.fontSize = fontSize;
+                element.style.fontWeight = isBold;
+                element.style.fontStyle = isItalic;
             });
         }
 
-        // Mostra la sezione di selezione dei font se l'utente è loggato
+        function changeBackgroundImage(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                document.getElementById('background-image').style.backgroundImage = `url(${e.target.result})`;
+            };
+            
+            reader.readAsDataURL(file);
+        }
+
+        function removeBackgroundImage() {
+            document.getElementById('background-image').style.backgroundImage = 'none';
+        }
+
+        function changeBackgroundColor() {
+            const backgroundColor = document.getElementById('backgroundColor').value;
+            document.body.style.backgroundColor = backgroundColor;
+        }
+
+        function applyBackgroundEffects() {
+            const effect = document.getElementById('backgroundEffects').value;
+            const backgroundImage = document.getElementById('background-image');
+            
+            switch (effect) {
+                case 'blur':
+                    backgroundImage.style.filter = 'blur(5px)';
+                    break;
+                case 'grayscale':
+                    backgroundImage.style.filter = 'grayscale(100%)';
+                    break;
+                case 'sepia':
+                    backgroundImage.style.filter = 'sepia(100%)';
+                    break;
+                case 'invert':
+                    backgroundImage.style.filter = 'invert(100%)';
+                    break;
+                case 'brightness':
+                    backgroundImage.style.filter = 'brightness(150%)';
+                    break;
+                case 'contrast':
+                    backgroundImage.style.filter = 'contrast(200%)';
+                    break;
+                case 'saturate':
+                    backgroundImage.style.filter = 'saturate(200%)';
+                    break;
+                case 'hue-rotate':
+                    backgroundImage.style.filter = 'hue-rotate(90deg)';
+                    break;
+                case 'opacity':
+                    backgroundImage.style.filter = 'opacity(50%)';
+                    break;
+                case 'dissolve':
+                    backgroundImage.style.transition = 'opacity 1s ease-in-out';
+                    backgroundImage.style.opacity = '0.5';
+                    break;
+                default:
+                    backgroundImage.style.filter = 'none';
+                    backgroundImage.style.transition = 'none';
+                    backgroundImage.style.opacity = '1';
+            }
+        }
+
+        function saveChanges() {
+            savedState = {
+                html: document.body.innerHTML,
+                backgroundColor: document.body.style.backgroundColor,
+                backgroundImage: document.getElementById('background-image').style.backgroundImage
+            };
+            alert('Modifiche salvate!');
+        }
+
+        function undoChanges() {
+            if (savedState.html) {
+                document.body.innerHTML = savedState.html;
+                document.body.style.backgroundColor = savedState.backgroundColor;
+                document.getElementById('background-image').style.backgroundImage = savedState.backgroundImage;
+                alert('Modifiche annullate!');
+            } else {
+                alert('Nessuna modifica precedente trovata.');
+            }
+        }
+
+        function makeDraggable(evt) {
+            const element = evt.target;
+            let posX = 0, posY = 0, mouseX = 0, mouseY = 0;
+
+            element.onmousedown = dragMouseDown;
+
+            function dragMouseDown(e) {
+                e = e || window.event;
+                e.preventDefault();
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                document.onmouseup = closeDragElement;
+                document.onmousemove = elementDrag;
+            }
+
+            function elementDrag(e) {
+                e = e || window.event;
+                e.preventDefault();
+                posX = mouseX - e.clientX;
+                posY = mouseY - e.clientY;
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                element.style.top = (element.offsetTop - posY) + "px";
+                element.style.left = (element.offsetLeft - posX) + "px";
+            }
+
+            function closeDragElement() {
+                document.onmouseup = null;
+                document.onmousemove = null;
+            }
+        }
+
+        document.querySelectorAll('.draggable').forEach(element => {
+            element.addEventListener('mousedown', makeDraggable);
+        });
+
         window.onload = function() {
             if (localStorage.getItem('loggedIn') === 'true') {
                 document.querySelector('.font-selector').style.display = 'block';
