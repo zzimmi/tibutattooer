@@ -61,6 +61,7 @@
             background: #fff;
             color: #000;
             min-height: 400px;
+            overflow: auto;
         }
         .footer {
             bottom: 0;
@@ -117,13 +118,21 @@
         <option value="'Roboto', sans-serif">Roboto</option>
         <option value="'Open Sans', sans-serif">Open Sans</option>
     </select>
-    <input type="number" id="fontSize" min="1" max="100" value="16">
+    <input type="number" id="fontSize" min="1" max="7" value="3">
     <input type="color" id="fontColor" value="#000000">
     <button onclick="execCmd('bold')"><b>B</b></button>
     <button onclick="execCmd('italic')"><i>I</i></button>
     <button onclick="execCmd('underline')"><u>U</u></button>
     <button onclick="execCmd('undo')">Undo</button>
     <button onclick="execCmd('redo')">Redo</button>
+    <button onclick="execCmd('justifyLeft')">Left</button>
+    <button onclick="execCmd('justifyCenter')">Center</button>
+    <button onclick="execCmd('justifyRight')">Right</button>
+    <button onclick="execCmd('justifyFull')">Justify</button>
+    <button onclick="execCmd('insertUnorderedList')">UL</button>
+    <button onclick="execCmd('insertOrderedList')">OL</button>
+    <button onclick="execCmd('outdent')">Outdent</button>
+    <button onclick="execCmd('indent')">Indent</button>
     <button onclick="logout()">Logout</button>
 </div>
 
