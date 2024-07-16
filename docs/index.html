@@ -13,23 +13,33 @@
             height: 100%;
             font-family: 'Arial', sans-serif;
             overflow: hidden;
-            background: black;
+            background: black; /* Colore di sfondo di fallback */
         }
-        .background-images {
+        .background-image {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-template-rows: repeat(2, 1fr);
+            background-image: url('https://github.com/zzimmi/tibutattooer/blob/main/collage_background.jpg?raw=true'); /* Assicurati che questo URL sia corretto */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
         }
-        .background-images img {
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            opacity: 0.5; /* Leggera trasparenza per migliorare la leggibilità del testo */
+            background: rgba(0, 0, 0, 0.5); /* Overlay semitrasparente per migliorare la leggibilità */
         }
         .title {
             position: absolute;
@@ -50,7 +60,7 @@
             color: white;
             text-decoration: none;
             margin: 0 15px;
-            font-size: 1.5em;
+            font-size: 1.8em; /* Aumentata la dimensione del testo di navigazione */
             text-shadow: 2px 2px 4px #000;
             font-family: 'Great Vibes', cursive;
         }
@@ -64,14 +74,14 @@
             background: rgba(0, 0, 0, 0.7);
             color: white;
             text-align: center;
-            padding: 20px 0;
-            font-size: 1.2em;
+            padding: 10px 0; /* Ridotta l'altezza del footer */
+            font-size: 1em; /* Ridotta la dimensione del font */
             display: flex;
             justify-content: space-around;
             box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
         }
         .footer div {
-            margin: 10px;
+            margin: 5px; /* Ridotta la marginatura per rendere il footer più compatto */
         }
         .footer a {
             color: white;
@@ -81,16 +91,16 @@
             text-decoration: underline;
         }
         .footer .social img, .footer .whatsapp img {
-            width: 40px;
-            height: 40px;
+            width: 35px; /* Ridotta la dimensione dei loghi */
+            height: 35px;
             vertical-align: middle;
-            margin: 0 10px;
+            margin: 0 5px; /* Aumentata leggermente la distanza tra i loghi */
         }
         .footer .contact img {
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
             vertical-align: middle;
-            margin: 0 10px;
+            margin: 0 5px;
         }
         @media (max-width: 768px) {
             .title {
@@ -98,7 +108,7 @@
                 top: 10%;
             }
             .nav {
-                top: 25%;
+                top: 20%;
                 right: 0;
                 width: 100%;
                 text-align: center;
@@ -106,28 +116,24 @@
             .nav a {
                 display: block;
                 margin: 10px 0;
-                font-size: 1.2em;
+                font-size: 1.5em; /* Aumentata la dimensione del testo di navigazione su mobile */
             }
             .footer {
                 flex-direction: column;
-                font-size: 1em;
-                padding: 10px 0;
+                font-size: 0.8em; /* Ridotta ulteriormente la dimensione del font per mobile */
+                padding: 5px 0; /* Ridotta ulteriormente l'altezza del footer per mobile */
             }
             .footer .social img, .footer .whatsapp img, .footer .contact img {
-                width: 35px;
-                height: 35px;
+                width: 30px; /* Ridotta la dimensione dei loghi per mobile */
+                height: 30px;
                 margin: 5px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="background-images">
-        <img src="https://github.com/zzimmi/tibutattooer/blob/main/IMG_9104.jpg?raw=true" alt="Immagine 1">
-        <img src="https://github.com/zzimmi/tibutattooer/blob/main/IMG_9106.jpg?raw=true" alt="Immagine 2">
-        <img src="https://github.com/zzimmi/tibutattooer/blob/main/IMG_9107.jpg?raw=true" alt="Immagine 3">
-        <img src="https://github.com/zzimmi/tibutattooer/blob/main/IMG_9108.jpg?raw=true" alt="Immagine 4">
-    </div>
+    <div class="background-image"></div>
+    <div class="overlay"></div> <!-- Overlay semitrasparente -->
     <div class="title">Tibutattooer</div>
     <div class="nav">
         <a href="works.html">Works</a>
