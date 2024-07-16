@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tibutattooer</title>
-    <link href="https://fonts.googleapis.com/css2?family=Gloock&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gloock&family=Great+Vibes&family=Permanent+Marker&display=swap" rel="stylesheet">
     <style>
         body, html {
             margin: 0;
@@ -35,12 +35,12 @@
         }
         .title {
             position: absolute;
-            top: 10%;
+            top: 15%;
             width: 100%;
             text-align: center;
             color: white;
-            font-size: 4em;
-            font-family: 'Gloock', serif;
+            font-size: 5em;
+            font-family: 'Permanent Marker', cursive;
             text-shadow: 2px 2px 4px #000;
         }
         .nav {
@@ -52,8 +52,9 @@
             color: white;
             text-decoration: none;
             margin: 0 15px;
-            font-size: 1.2em;
+            font-size: 1.5em;
             text-shadow: 2px 2px 4px #000;
+            font-family: 'Great Vibes', cursive;
         }
         .nav a:hover {
             text-decoration: underline;
@@ -66,7 +67,7 @@
             color: white;
             text-align: center;
             padding: 20px 0;
-            font-size: 1em;
+            font-size: 1.2em;
             display: flex;
             justify-content: space-around;
             box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
@@ -82,25 +83,25 @@
             text-decoration: underline;
         }
         .footer .social img, .footer .whatsapp img {
-            width: 30px; /* Dimensione maggiore per il logo */
-            height: 30px;
+            width: 40px; /* Dimensione maggiore per il logo */
+            height: 40px;
             vertical-align: middle;
-            margin-right: 5px;
+            margin: 0 10px;
         }
         .footer .contact img {
-            width: 30px; /* Dimensione maggiore per il logo */
-            height: 30px;
+            width: 40px; /* Dimensione maggiore per il logo */
+            height: 40px;
             vertical-align: middle;
-            margin-right: 5px;
+            margin: 0 10px;
         }
         /* Media Query per dispositivi mobili */
         @media (max-width: 768px) {
             .title {
-                font-size: 2.5em;
-                top: 5%;
+                font-size: 3em;
+                top: 10%;
             }
             .nav {
-                top: 20%;
+                top: 25%;
                 right: 0;
                 width: 100%;
                 text-align: center;
@@ -108,6 +109,7 @@
             .nav a {
                 display: block;
                 margin: 10px 0;
+                font-size: 1.2em;
             }
             .footer {
                 flex-direction: column;
@@ -115,8 +117,9 @@
                 padding: 10px 0;
             }
             .footer .social img, .footer .whatsapp img, .footer .contact img {
-                width: 25px; /* Riduci la dimensione del logo per i dispositivi mobili */
-                height: 25px;
+                width: 35px; /* Riduci la dimensione del logo per i dispositivi mobili */
+                height: 35px;
+                margin: 5px;
             }
         }
     </style>
