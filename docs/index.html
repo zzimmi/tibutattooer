@@ -103,22 +103,24 @@
             vertical-align: middle;
             margin: 0 5px;
         }
-        .font-selector {
-            display: none;
-            position: absolute;
-            top: 70%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
             background: rgba(0, 0, 0, 0.8);
-            padding: 20px;
-            border-radius: 10px;
             color: white;
             text-align: center;
+            padding: 10px 0;
+            z-index: 1000;
         }
-        .font-selector select, .font-selector input, .font-selector button {
-            padding: 10px;
-            margin: 10px;
+        .toolbar select, .toolbar input, .toolbar button {
+            padding: 5px;
+            margin: 5px;
             font-size: 1em;
+        }
+        .toolbar button {
+            cursor: pointer;
         }
         @media (max-width: 768px) {
             .title {
@@ -146,8 +148,8 @@
                 height: 30px;
                 margin: 5px;
             }
-            .font-selector {
-                display: none;
+            .toolbar {
+                font-size: 0.8em;
             }
         }
     </style>
@@ -184,8 +186,7 @@
         </div>
     </div>
 
-    <div class="font-selector">
-        <label for="fontSelect">Seleziona Font:</label>
+    <div class="toolbar">
         <select id="fontSelect">
             <option value="'Great Vibes', cursive">Great Vibes</option>
             <option value="'Permanent Marker', cursive">Permanent Marker</option>
@@ -233,30 +234,17 @@
             <option value="'Ubuntu Mono', monospace">Ubuntu Mono</option>
             <option value="'Work Sans', sans-serif">Work Sans</option>
         </select>
-        <br>
-        <label for="fontSize">Dimensione Font:</label>
         <input type="number" id="fontSize" min="10" max="100" value="16">
-        <br>
-        <label for="fontColor">Colore Font:</label>
         <input type="color" id="fontColor" value="#ffffff">
-        <br>
-        <label for="fontWeight">Grassetto:</label>
+        <label for="fontWeight">B</label>
         <input type="checkbox" id="fontWeight">
-        <br>
-        <label for="fontStyle">Corsivo:</label>
+        <label for="fontStyle">I</label>
         <input type="checkbox" id="fontStyle">
-        <br>
-        <button onclick="applyStyles()">Applica Stili al Testo Selezionato</button>
-        <br>
-        <label for="backgroundImage">Carica Immagine di Sfondo:</label>
+        <button onclick="applyStyles()">Applica Stili</button>
+        <label for="backgroundImage">Sfondo:</label>
         <input type="file" id="backgroundImage" accept="image/*" onchange="changeBackgroundImage(event)">
-        <br>
-        <button onclick="removeBackgroundImage()">Rimuovi Immagine di Sfondo</button>
-        <br>
-        <label for="backgroundColor">Colore di Sfondo:</label>
+        <button onclick="removeBackgroundImage()">Rimuovi Sfondo</button>
         <input type="color" id="backgroundColor" value="#000000" onchange="changeBackgroundColor()">
-        <br>
-        <label for="backgroundEffects">Effetti di Sfondo:</label>
         <select id="backgroundEffects" onchange="applyBackgroundEffects()">
             <option value="none">Nessuno</option>
             <option value="blur">Sfocatura</option>
@@ -270,13 +258,15 @@
             <option value="opacity">Opacità</option>
             <option value="dissolve">Dissolvenza</option>
         </select>
-        <br>
         <button onclick="saveChanges()">Salva</button>
         <button onclick="undoChanges()">Indietro</button>
+        <button onclick="logout()">Logout</button>
     </div>
 
     <script>
         let savedState = {};
+        let history = [];
+        let currentStateIndex = -1;
 
         function applyStyles() {
             const selectedFont = document.getElementById('fontSelect').value;
@@ -297,6 +287,8 @@
                 element.style.fontWeight = isBold;
                 element.style.fontStyle = isItalic;
             });
+
+            saveState();
         }
 
         function changeBackgroundImage(event) {
@@ -308,15 +300,19 @@
             };
             
             reader.readAsDataURL(file);
+
+            saveState();
         }
 
         function removeBackgroundImage() {
             document.getElementById('background-image').style.backgroundImage = 'none';
+            saveState();
         }
 
         function changeBackgroundColor() {
             const backgroundColor = document.getElementById('backgroundColor').value;
             document.body.style.backgroundColor = backgroundColor;
+            saveState();
         }
 
         function applyBackgroundEffects() {
@@ -360,26 +356,56 @@
                     backgroundImage.style.transition = 'none';
                     backgroundImage.style.opacity = '1';
             }
+
+            saveState();
+        }
+
+        function saveState() {
+            const state = {
+                html: document.body.innerHTML,
+                backgroundColor: document.body.style.backgroundColor,
+                backgroundImage: document.getElementById('background-image').style.backgroundImage,
+                backgroundFilter: document.getElementById('background-image').style.filter,
+                backgroundOpacity: document.getElementById('background-image').style.opacity
+            };
+            if (currentStateIndex < history.length - 1) {
+                history = history.slice(0, currentStateIndex + 1);
+            }
+            history.push(state);
+            currentStateIndex++;
         }
 
         function saveChanges() {
             savedState = {
                 html: document.body.innerHTML,
                 backgroundColor: document.body.style.backgroundColor,
-                backgroundImage: document.getElementById('background-image').style.backgroundImage
+                backgroundImage: document.getElementById('background-image').style.backgroundImage,
+                backgroundFilter: document.getElementById('background-image').style.filter,
+                backgroundOpacity: document.getElementById('background-image').style.opacity
             };
             alert('Modifiche salvate!');
         }
 
         function undoChanges() {
-            if (savedState.html) {
-                document.body.innerHTML = savedState.html;
-                document.body.style.backgroundColor = savedState.backgroundColor;
-                document.getElementById('background-image').style.backgroundImage = savedState.backgroundImage;
+            if (currentStateIndex > 0) {
+                currentStateIndex--;
+                const state = history[currentStateIndex];
+                document.body.innerHTML = state.html;
+                document.body.style.backgroundColor = state.backgroundColor;
+                const backgroundImage = document.getElementById('background-image');
+                backgroundImage.style.backgroundImage = state.backgroundImage;
+                backgroundImage.style.filter = state.backgroundFilter;
+                backgroundImage.style.opacity = state.backgroundOpacity;
                 alert('Modifiche annullate!');
             } else {
                 alert('Nessuna modifica precedente trovata.');
             }
+        }
+
+        function logout() {
+            localStorage.setItem('loggedIn', 'false');
+            alert('Logout effettuato!');
+            // Aggiungi eventuale logica di reindirizzamento o pulizia dei dati utente
         }
 
         function makeDraggable(evt) {
@@ -411,6 +437,7 @@
             function closeDragElement() {
                 document.onmouseup = null;
                 document.onmousemove = null;
+                saveState();
             }
         }
 
@@ -420,7 +447,8 @@
 
         window.onload = function() {
             if (localStorage.getItem('loggedIn') === 'true') {
-                document.querySelector('.font-selector').style.display = 'block';
+                document.querySelector('.toolbar').style.display = 'block';
+                saveState(); // Salva lo stato iniziale
             }
         }
     </script>
