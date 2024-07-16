@@ -58,7 +58,29 @@
         .nav a:hover {
             text-decoration: underline;
         }
-
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 1em;
+            display: flex;
+            justify-content: space-around;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+        }
+        .footer div {
+            margin: 10px;
+        }
+        .footer a {
+            color: white;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
         /* Media Query per dispositivi mobili */
         @media (max-width: 768px) {
             .title {
@@ -75,6 +97,10 @@
                 display: block;
                 margin: 10px 0;
             }
+            .footer {
+                flex-direction: column;
+                font-size: 1em;
+            }
         }
     </style>
 </head>
@@ -87,6 +113,22 @@
         <a href="about.html">About</a>
         <a href="events.html">Upcoming Events</a>
         <a href="contacts.html">Contact</a>
+    </div>
+    <div class="footer">
+        <div class="location">
+            <h3>Location</h3>
+            <a href="https://www.google.it/maps/place/Studio+negozio+Tatuaggi+Steel+Power+Tattoo/@45.5246253,9.5198435,17z/data=!3m1!4b1!4m6!3m5!1s0x47814a8cdf04eccd:0xe7bafbaaf4727410!8m2!3d45.5246216!4d9.5224184!16s%2Fg%2F11bz__q_ln?entry=ttu" target="_blank">Google Maps</a>
+        </div>
+        <div class="hours">
+            <h3>Hours</h3>
+            <p>Tuesday - Saturday: 10am - 8pm</p>
+            <p>Sunday - Monday : Closed</p>
+        </div>
+        <div class="contact">
+            <h3>Contact</h3>
+            <p><a href="contacts.html">Email</a></p>
+            <p><a href="https://www.instagram.com/tibutattooer/" target="_blank">Instagram</a></p>
+        </div>
     </div>
 </body>
 </html>
