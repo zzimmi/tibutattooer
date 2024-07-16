@@ -159,7 +159,7 @@
         }
     </style>
 </head>
-<body>
+<body contenteditable="true">
     <div class="background-image"></div>
     <div class="overlay"></div>
     <div class="title">Tibutattooer</div>
@@ -232,8 +232,8 @@
     </div>
 
     <script>
-        const username = 'yourUsername';  // Set your username here
-        const password = 'yourPassword';  // Set your password here
+        const username = 'tiburon';  // Set your username here
+        const password = 'shark97';  // Set your password here
 
         function toggleLogin() {
             const enteredUsername = prompt("Enter username:");
@@ -257,13 +257,12 @@
 
         function changeFont() {
             const selectedFont = document.getElementById('fontSelect').value;
-            const selectedText = window.getSelection().toString();
-            if (selectedText) {
-                document.execCommand('styleWithCSS', false, true);
-                document.execCommand('fontName', false, selectedFont);
-            } else {
-                alert("Please select the text you want to change the font for.");
-            }
+            const selection = window.getSelection();
+            if (!selection.rangeCount) return;
+            const range = selection.getRangeAt(0);
+            const span = document.createElement('span');
+            span.style.fontFamily = selectedFont;
+            range.surroundContents(span);
         }
 
         window.onload = function() {
