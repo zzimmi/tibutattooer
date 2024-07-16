@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tibutattooer</title>
     <link href="https://fonts.googleapis.com/css2?family=Gloock&family=Great+Vibes&family=Permanent+Marker&family=Roboto&family=Open+Sans&display=swap" rel="stylesheet">
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <style>
         body, html {
             margin: 0;
@@ -48,6 +47,13 @@
         .toolbar button, .toolbar select, .toolbar input {
             margin: 5px;
             padding: 5px;
+            color: white;
+            background: #444;
+            border: none;
+            cursor: pointer;
+        }
+        .toolbar select, .toolbar input {
+            background: #555;
         }
         #editor {
             margin-top: 60px;
@@ -103,12 +109,25 @@
 <div class="overlay"></div>
 
 <div class="toolbar">
+    <select id="fontSelect">
+        <option value="Arial">Arial</option>
+        <option value="'Gloock', serif">Gloock</option>
+        <option value="'Great Vibes', cursive">Great Vibes</option>
+        <option value="'Permanent Marker', cursive">Permanent Marker</option>
+        <option value="'Roboto', sans-serif">Roboto</option>
+        <option value="'Open Sans', sans-serif">Open Sans</option>
+    </select>
+    <input type="number" id="fontSize" min="1" max="100" value="16">
+    <input type="color" id="fontColor" value="#000000">
+    <button onclick="execCmd('bold')"><b>B</b></button>
+    <button onclick="execCmd('italic')"><i>I</i></button>
+    <button onclick="execCmd('underline')"><u>U</u></button>
     <button onclick="execCmd('undo')">Undo</button>
     <button onclick="execCmd('redo')">Redo</button>
     <button onclick="logout()">Logout</button>
 </div>
 
-<div id="editor">
+<div id="editor" contenteditable="true">
     <h1 class="title">Tibutattooer</h1>
     <div class="nav">
         <a href="works.html">Works</a>
@@ -140,30 +159,26 @@
 </div>
 
 <script>
-    tinymce.init({
-        selector: '#editor',
-        plugins: 'print preview importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
-        menubar: 'file edit view insert format tools table help',
-        toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
-        height: 500,
-        content_css: [
-            '//fonts.googleapis.com/css2?family=Gloock&family=Great+Vibes&family=Permanent+Marker&family=Roboto&family=Open+Sans&display=swap'
-        ],
-        setup: function (editor) {
-            editor.on('init', function (e) {
-                editor.setContent(document.getElementById('editor').innerHTML);
-            });
-        }
+    function execCmd(command, value = null) {
+        document.execCommand(command, false, value);
+    }
+
+    document.getElementById('fontSelect').addEventListener('change', function() {
+        execCmd('fontName', this.value);
     });
 
-    function execCmd(command) {
-        tinymce.activeEditor.execCommand(command);
-    }
+    document.getElementById('fontSize').addEventListener('input', function() {
+        execCmd('fontSize', this.value);
+    });
+
+    document.getElementById('fontColor').addEventListener('input', function() {
+        execCmd('foreColor', this.value);
+    });
 
     function logout() {
         localStorage.setItem('loggedIn', 'false');
         alert('Logout effettuato!');
-        // Aggiungi eventuale logica di reindirizzamento o pulizia dei dati utent
+        // Aggiungi eventuale logica di reindirizzamento o pulizia dei dati utente
     }
 </script>
 
