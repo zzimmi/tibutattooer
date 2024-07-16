@@ -87,6 +87,12 @@
             vertical-align: middle;
             margin-right: 5px;
         }
+        .footer .contact {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em; /* Più grande per la versione desktop */
+        }
         /* Media Query per dispositivi mobili */
         @media (max-width: 768px) {
             .title {
@@ -106,6 +112,10 @@
             .footer {
                 flex-direction: column;
                 font-size: 1em;
+                padding: 10px 0;
+            }
+            .footer .contact {
+                font-size: 1em; /* Riduci la dimensione del font per i dispositivi mobili */
             }
         }
     </style>
@@ -123,21 +133,16 @@
     <div class="footer">
         <div class="location">
             <h3>Location</h3>
-            <a href="https://www.google.it/maps/place/Studio+negozio+Tatuaggi+Steel+Power+Tattoo/@45.5246253,9.5198435,17z/data=!3m1!4b1!4m6!3m5!1s0x47814a8cdf04eccd:0xe7bafbaaf4727410!8m2!3d45.5246216!4d9.5224184!16s%2Fg%2F11bz__q_ln?entry=ttu
-"_blank">Piazza G. Garibaldi, 68, 20062 Cassano d'Adda MI</a>
-        </div>
-        <div class="hours">
-            <h3>Hours</h3>
-            <p>Monday - Friday: 10am - 8pm</p>
-            <p>Saturday: 10am - 6pm</p>
-            <p>Sunday: Closed</p>
+            <a href="https://www.google.it/maps/place/Studio+negozio+Tatuaggi+Steel+Power+Tattoo/@45.5246253,9.5198435,17z/data=!3m1!4b1!4m6!3m5!1s0x47814a8cdf04eccd:0xe7bafbaaf4727410!8m2!3d45.5246216!4d9.5224184!16s%2Fg%2F11bz__q_ln?entry=ttu"
+               target="_blank">Piazza G. Garibaldi, 68, 20062 Cassano d'Adda MI</a>
         </div>
         <div class="contact">
-            <h3>Contact</h3>
-            <p><a href="contacts.html">yungtibu@gmail.com</a></p>
-            <p><a href="https://www.instagram.com/tibutattooer/" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram Logo">@tibutattooer</a>
-            </p>
+            <a href="https://www.instagram.com/tibutattooer/" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram Logo">@tibutattooer
+            </a>
+        </div>
+        <div class="contact">
+            <a href="contacts.html">yungtibu@gmail.com</a>
         </div>
     </div>
 </body>
