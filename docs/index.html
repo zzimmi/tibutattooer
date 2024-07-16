@@ -63,7 +63,10 @@
             text-decoration: underline;
         }
         .nav a#login {
-            display: none; /* Initially hidden on mobile */
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            display: block;
         }
         .font-selector {
             display: none;
@@ -138,6 +141,9 @@
                 font-size: 1.5em;
             }
             .nav a#login {
+                position: fixed;
+                top: 10px;
+                left: 10px;
                 display: none;
             }
             .footer {
@@ -226,8 +232,8 @@
     </div>
 
     <script>
-        const username = 'Tiburon';  // Set your username here
-        const password = 'Shark97';  // Set your password here
+        const username = 'yourUsername';  // Set your username here
+        const password = 'yourPassword';  // Set your password here
 
         function toggleLogin() {
             const enteredUsername = prompt("Enter username:");
@@ -251,8 +257,13 @@
 
         function changeFont() {
             const selectedFont = document.getElementById('fontSelect').value;
-            document.execCommand('styleWithCSS', false, true);
-            document.execCommand('fontName', false, selectedFont);
+            const selectedText = window.getSelection().toString();
+            if (selectedText) {
+                document.execCommand('styleWithCSS', false, true);
+                document.execCommand('fontName', false, selectedFont);
+            } else {
+                alert("Please select the text you want to change the font for.");
+            }
         }
 
         window.onload = function() {
