@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tibutattooer</title>
     <link href="https://fonts.googleapis.com/css2?family=Gloock&family=Great+Vibes&family=Permanent+Marker&family=Roboto&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Lobster&family=Montserrat&family=Merriweather&family=Raleway&family=Poppins&family=Lora&family=Ubuntu&family=Nunito&family=Karla&family=Oswald&family=Cabin&family=Pacifico&family=Shadows+Into+Light&family=Quicksand&family=Josefin+Sans&family=Arvo&family=Signika&family=Fjalla+One&family=Playfair+Display&family=Varela+Round&family=Amatic+SC&family=Zilla+Slab&family=Indie+Flower&family=Rubik&family=Crimson+Text&family=Courgette&family=Domine&family=Bree+Serif&display=swap" rel="stylesheet">
     <style>
         body, html {
             margin: 0;
@@ -61,28 +60,6 @@
         }
         .nav a:hover {
             text-decoration: underline;
-        }
-        .nav a#login {
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            display: block;
-        }
-        .font-selector {
-            display: none;
-            position: absolute;
-            top: 5%;
-            left: 5%;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            z-index: 1000;
-        }
-        .font-selector select {
-            font-size: 1em;
-            padding: 5px;
-            color: black;
         }
         .footer {
             position: absolute;
@@ -140,12 +117,6 @@
                 margin: 10px 0;
                 font-size: 1.5em;
             }
-            .nav a#login {
-                position: fixed;
-                top: 10px;
-                left: 10px;
-                display: none;
-            }
             .footer {
                 flex-direction: column;
                 font-size: 0.8em;
@@ -159,7 +130,7 @@
         }
     </style>
 </head>
-<body contenteditable="true">
+<body>
     <div class="background-image"></div>
     <div class="overlay"></div>
     <div class="title">Tibutattooer</div>
@@ -169,47 +140,6 @@
         <a href="about.html">About</a>
         <a href="events.html">Upcoming Events</a>
         <a href="contacts.html">Contact</a>
-        <a href="#" id="login" onclick="toggleLogin()">Login</a>
-        <a href="#" id="logout" onclick="toggleLogout()" style="display: none;">Logout</a>
-    </div>
-    <div class="font-selector" id="fontSelector">
-        <label for="fontSelect">Choose Font:</label>
-        <select id="fontSelect" onchange="changeFont()">
-            <option value="'Arial', sans-serif">Arial</option>
-            <option value="'Gloock', serif">Gloock</option>
-            <option value="'Great Vibes', cursive">Great Vibes</option>
-            <option value="'Permanent Marker', cursive">Permanent Marker</option>
-            <option value="'Roboto', sans-serif">Roboto</option>
-            <option value="'Open Sans', sans-serif">Open Sans</option>
-            <option value="'Lobster', cursive">Lobster</option>
-            <option value="'Montserrat', sans-serif">Montserrat</option>
-            <option value="'Merriweather', serif">Merriweather</option>
-            <option value="'Raleway', sans-serif">Raleway</option>
-            <option value="'Poppins', sans-serif">Poppins</option>
-            <option value="'Lora', serif">Lora</option>
-            <option value="'Ubuntu', sans-serif">Ubuntu</option>
-            <option value="'Nunito', sans-serif">Nunito</option>
-            <option value="'Karla', sans-serif">Karla</option>
-            <option value="'Oswald', sans-serif">Oswald</option>
-            <option value="'Cabin', sans-serif">Cabin</option>
-            <option value="'Pacifico', cursive">Pacifico</option>
-            <option value="'Shadows Into Light', cursive">Shadows Into Light</option>
-            <option value="'Quicksand', sans-serif">Quicksand</option>
-            <option value="'Josefin Sans', sans-serif">Josefin Sans</option>
-            <option value="'Arvo', serif">Arvo</option>
-            <option value="'Signika', sans-serif">Signika</option>
-            <option value="'Fjalla One', sans-serif">Fjalla One</option>
-            <option value="'Playfair Display', serif">Playfair Display</option>
-            <option value="'Varela Round', sans-serif">Varela Round</option>
-            <option value="'Amatic SC', cursive">Amatic SC</option>
-            <option value="'Zilla Slab', serif">Zilla Slab</option>
-            <option value="'Indie Flower', cursive">Indie Flower</option>
-            <option value="'Rubik', sans-serif">Rubik</option>
-            <option value="'Crimson Text', serif">Crimson Text</option>
-            <option value="'Courgette', cursive">Courgette</option>
-            <option value="'Domine', serif">Domine</option>
-            <option value="'Bree Serif', serif">Bree Serif</option>
-        </select>
     </div>
     <div class="footer">
         <div class="location">
@@ -230,56 +160,5 @@
             <a href="contacts.html">yungtibu@gmail.com</a>
         </div>
     </div>
-
-    <script>
-        const username = 'tiburon';  // Set your username here
-        const password = 'shark97';  // Set your password here
-
-        function toggleLogin() {
-            const enteredUsername = prompt("Enter username:");
-            const enteredPassword = prompt("Enter password:");
-            if (enteredUsername === username && enteredPassword === password) {
-                localStorage.setItem('loggedIn', 'true');
-                document.getElementById('login').style.display = 'none';
-                document.getElementById('logout').style.display = 'block';
-                document.getElementById('fontSelector').style.display = 'block';
-            } else {
-                alert("Incorrect username or password");
-            }
-        }
-
-        function toggleLogout() {
-            localStorage.removeItem('loggedIn');
-            document.getElementById('login').style.display = 'block';
-            document.getElementById('logout').style.display = 'none';
-            document.getElementById('fontSelector').style.display = 'none';
-        }
-
-        function changeFont() {
-            const selectedFont = document.getElementById('fontSelect').value;
-            const selection = window.getSelection();
-            if (!selection.rangeCount) return;
-            const range = selection.getRangeAt(0);
-            const span = document.createElement('span');
-            span.style.fontFamily = selectedFont;
-            range.surroundContents(span);
-        }
-
-        window.onload = function() {
-            if (localStorage.getItem('loggedIn') === 'true') {
-                document.getElementById('login').style.display = 'none';
-                document.getElementById('logout').style.display = 'block';
-                document.getElementById('fontSelector').style.display = 'block';
-            } else {
-                document.getElementById('login').style.display = 'block';
-                document.getElementById('logout').style.display = 'none';
-                document.getElementById('fontSelector').style.display = 'none';
-            }
-
-            if (window.innerWidth > 768) {
-                document.getElementById('login').style.display = localStorage.getItem('loggedIn') === 'true' ? 'none' : 'block';
-            }
-        };
-    </script>
 </body>
 </html>
